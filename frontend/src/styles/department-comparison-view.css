@@ -1,0 +1,48 @@
+.department-comparison-view {
+  padding: 20px;
+}
+
+.department-comparison-view h3 {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  color: #212121;
+}
+
+.comparison-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.comparison-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.comparison-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.comparison-card h4 {
+  margin-bottom: 12px;
+  color: #212121;
+}
+
+.comparison-card p {
+  margin: 6px 0;
+  color: #666;
+}
+
+.comparison-card p strong {
+  color: #003b7e;
+}
+
+.error-message {
+  color: #d32f2f;
+  text-align: center;
+  padding: 20px;
+}

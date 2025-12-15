@@ -1,0 +1,134 @@
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.analytics-container {
+  padding: 24px;
+}
+
+.analytics-container h2 {
+  font-size: 32px;
+  margin-bottom: 24px;
+  color: #212121;
+  animation: fadeInUp 0.6s ease-out;
+}
+
+.analytics-controls {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+}
+
+.analytics-controls label {
+  font-weight: 500;
+  color: #212121;
+}
+
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.tab {
+  padding: 10px 20px;
+  background-color: #e0e0e0;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.tab.active {
+  background-color: #003b7e;
+  color: white;
+}
+
+.tab:hover:not(.active) {
+  background-color: #cccccc;
+}
+
+.tab-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  animation: fadeIn 0.4s ease-in-out;
+  min-height: 300px;
+  position: relative; /* ✅ Чтобы z-index работал */
+  z-index: 1; /* Низкий z-index, но ниже, чем у селекта */
+}
+
+.selectors {
+  display: flex;
+  gap: 20px;
+  align-items: center; /* Выравнивание по центру по вертикали */
+  margin-bottom: 40px;
+  animation: fadeInUp 0.6s ease-out 0.2s both;
+  position: relative;
+  z-index: 101;
+  justify-content: flex-start;
+}
+
+/* Обновим стиль кнопки "Сравнить", чтобы она совпадала с селектом */
+.selectors .primary-btn {
+  padding: 10px 16px; /* Такой же отступ, как у селекта */
+  height: 40px; /* Высота как у селекта */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  margin-top: 0; /* Убираем лишние отступы */
+}
+
+.charts-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  animation: fadeInUp 0.6s ease-out 0.4s both;
+  position: relative;
+  z-index: 1;
+}
+
+.chart-card {
+  background-color: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  padding: 16px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
+  z-index: 1;
+}
+
+.chart-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.chart-card h3 {
+  margin-bottom: 12px;
+  color: #212121;
+}
+
+.chart-placeholder {
+  height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fafafa;
+  border-radius: 6px;
+}
+
+.chart-placeholder svg {
+  width: 100%;
+  height: 100%;
+}

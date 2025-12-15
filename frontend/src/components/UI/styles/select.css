@@ -1,0 +1,27 @@
+.select-container {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.select-label {
+  font-size: 14px;
+  font-weight: 500;
+  color: #212121;
+}
+
+.select-field {
+  padding: 10px 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  background-color: white;
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
+}
+
+.select-field:focus {
+  outline: none;
+  border-color: #003b7e;
+  box-shadow: 0 0 0 2px rgba(0, 59, 126, 0.2);
+}
