@@ -121,8 +121,6 @@ efcon/
 
 ## 👨‍💻 Автор
 
-<<<<<<< HEAD
 **DDatomicstickDD** — разработчик системы EFCON
 =======
-**DDatomicstickDD** — разработчик системы EFCON
->>>>>>> bfdb2ac7 (feat: add department editing; fix: CORS and _department_to_dict error; chore: update README and styling)
+
