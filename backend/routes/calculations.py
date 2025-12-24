@@ -1,4 +1,4 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, request, jsonify, current_app
 from models import db, Department, Personnel, Equipment, SupervisedObjects, Statistics, Planning, CalculationResult
 from utils import TimeFundCalculator, StaffCalculator
 from datetime import datetime
@@ -11,6 +11,7 @@ def calculate_time_funds(department_id):
     if request.method == 'OPTIONS':
         return '', 200
         
+    current_app.logger.info(f"Начат расчёт для подразделения {department_id}")    
     try:
         data = request.get_json() or {}
         selected_month = data.get('month')
@@ -106,12 +107,12 @@ def calculate_time_funds(department_id):
             "recommendations": _generate_recommendations(staff_result, actual_result)
         }
         
-        print(f"=== CALCULATION COMPLETED SUCCESSFULLY ===")
+        current_app.logger.info(f"Расчёт для подразделения {department_id} завершён успешно")
         return jsonify(response), 200
         
     except Exception as e:
         db.session.rollback()
-        print(f"=== CALCULATION ERROR: {str(e)} ===")
+        current_app.logger.error(f"Ошибка расчёта для подразделения {department_id}: {str(e)}")
         import traceback
         traceback.print_exc()
         return jsonify({"error": f"Ошибка расчета: {str(e)}"}), 500

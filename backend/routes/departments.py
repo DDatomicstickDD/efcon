@@ -41,6 +41,17 @@ def create_department():
         "name": department.name
     }), 201
 
+@departments_bp.route('/departments/<int:department_id>', methods=['PUT'])
+def update_department(department_id):
+    data = request.get_json()
+    if not data or 'name' not in data or not data['name'].strip():
+        return jsonify({"error": "Название подразделения обязательно"}), 400
+
+    department = Department.query.get_or_404(department_id)
+    department.name = data['name'].strip()
+    db.session.commit()
+    return jsonify({"message": "Обновлено", "data": _department_to_dict(department)}), 200
+
 @departments_bp.route('/departments/<int:department_id>', methods=['DELETE'])
 def delete_department(department_id):
     """Удаление подразделения и всех связанных данных"""
@@ -64,3 +75,10 @@ def delete_department(department_id):
     except Exception as e:
         db.session.rollback()
         return jsonify({"error": f"Ошибка при удалении: {str(e)}"}), 500
+
+def _department_to_dict(department):
+    return {
+        'id': department.id,
+        'name': department.name,
+        'created_at': department.created_at.isoformat() if department.created_at else None
+    }

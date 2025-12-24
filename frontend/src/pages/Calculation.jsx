@@ -174,7 +174,7 @@ const Calculation = () => {
 
       <div className="form-actions">
         <button
-          className="secondary-btn"
+          className="primary-btn"
           onClick={() => {
             const currentTab = tabs.find(t => t.id === activeTab);
             if (currentTab) {

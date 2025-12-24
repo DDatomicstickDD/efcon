@@ -6,8 +6,10 @@ const Footer = () => {
     <footer className="footer">
       <p>efcon © 2025</p>
       <div>
-        <a href="#">Документация</a>
         <a href="#">Поддержка</a>
+        <a href="https://github.com/DDatomicstickDD/efcon" target="_blank" rel="noopener noreferrer">
+          Документация
+        </a>
         <a href="#">Контакты</a>
       </div>
     </footer>

@@ -1,6 +1,8 @@
+import logging
+import os
 from flask import Flask, jsonify
 from flask_cors import CORS
-from models import db, Department  # ✅ Импортируем Department
+from models import db, Department  
 from routes import (
     departments_bp,
     personnel_bp,
@@ -8,16 +10,34 @@ from routes import (
     objects_bp,
     statistics_bp,
     calculations_bp,
-    planning_bp  # ✅ Добавлен импорт
+    planning_bp  
 )
 from datetime import datetime
+from logging.handlers import RotatingFileHandler
 
 def create_app():
     app = Flask(__name__)
     app.config.from_object('config.Config')
-    CORS(app,
-         resources={r"/api/*": {"origins": "http://localhost:3000"}},  # ✅ Изменили на 3000
+
+    CORS(app, 
+         origins=["http://localhost:3000"],  
+         methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+         allow_headers=["Content-Type", "Authorization"],
          supports_credentials=True)
+
+    if not app.debug and not app.testing:
+        if not os.path.exists('logs'):
+            os.mkdir('logs')
+        file_handler = RotatingFileHandler(
+            'logs/efcon.log', maxBytes=10240, backupCount=10
+        )
+        file_handler.setFormatter(logging.Formatter(
+            '%(asctime)s %(levelname)s: %(message)s [in %(pathname)s:%(lineno)d]'
+        ))
+        file_handler.setLevel(logging.INFO)
+        app.logger.addHandler(file_handler)
+        app.logger.setLevel(logging.INFO)
+        app.logger.info('EFCON startup')
 
     # Инициализация расширений
     db.init_app(app)
@@ -39,7 +59,6 @@ def create_app():
     def health_check():
         return jsonify({"status": "healthy", "timestamp": datetime.utcnow().isoformat()})
 
-    # ✅ Новый маршрут для проверки, есть ли подразделения
     @app.route('/api/departments/status', methods=['GET'])
     def get_departments_status():
         total_count = Department.query.count()
@@ -52,7 +71,7 @@ def create_app():
     # Создание таблиц и тестовых данных
     with app.app_context():
         db.create_all()
-        # _create_test_data()  # ✅ Закомментировано
+        # _create_test_data()  
 
     return app
 
